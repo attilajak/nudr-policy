@@ -1,0 +1,21 @@
+{
+  "name": "unified-data-repository-service-api-file-for-policy-data",
+  "version": "-",
+  "description": "The API version is defined in 3GPP TS 29.504 © 2019, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC). All rights reserved. ",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.7.0",
+    "js-yaml": "^3.13.1",
+    "oas3-tools": "^1.0.2-RC2",
+    "request": "^2.88.0"
+  }
+}

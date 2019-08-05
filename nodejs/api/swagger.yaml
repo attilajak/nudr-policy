@@ -1,0 +1,3316 @@
+openapi: 3.0.0
+info:
+  title: Unified Data Repository Service API file for policy data
+  description: |
+    The API version is defined in 3GPP TS 29.504
+    © 2019, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).
+    All rights reserved.
+  version: '-'
+externalDocs:
+  description: 3GPP TS 29.519 V15.4.0; 5G System; Usage of the Unified Data Repository
+    Service for Policy Data, Application Data and Structured Data for Exposure.
+  url: http://www.3gpp.org/ftp/Specs/archive/29_series/29.519/
+servers:
+- url: /
+paths:
+  /policy-data/ues/{ueId}/am-data:
+    get:
+      summary: Retrieves the access and mobility policy data for a subscriber
+      operationId: ReadAccessAndMobilityPolicyData
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      responses:
+        200:
+          description: Upon success, a response body containing access and mobility
+            policies shall be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AmPolicyData'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/ues/{ueId}/ue-policy-set:
+    get:
+      summary: Retrieves the UE policy set data for a subscriber
+      operationId: ReadUEPolicySet
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      responses:
+        200:
+          description: Upon success, a response body containing UE policies shall
+            be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UePolicySet'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    put:
+      summary: Create or modify the UE policy set data for a subscriber
+      operationId: CreateOrReplaceUEPolicySet
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UePolicySet'
+      responses:
+        201:
+          description: Successful case. The resource has been successfully created
+            and a response body containing a representation of the created UEPolicySet
+            resource shall be returned.
+          headers:
+            Location:
+              description: Contains the URI of the newly created resource
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UePolicySet'
+        200:
+          description: Successful case. The resource has been successfully created
+            and a response body containing UE policies shall be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UePolicySet'
+        204:
+          description: Successful case. The resource has been successfully updated
+            and no additional content is to be sent in the response message.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    patch:
+      summary: Modify the UE policy set data for a subscriber
+      operationId: UpdateUEPolicySet
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/UePolicySetPatch'
+      responses:
+        204:
+          description: Successful case. The resource has been successfully updated
+            and no additional content is to be sent in the response message.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/ues/{ueId}/sm-data:
+    get:
+      summary: Retrieves the session management policy data for a subscriber
+      operationId: ReadSessionManagementPolicyData
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      responses:
+        200:
+          description: Upon success, a response body containing SmPolicyData shall
+            be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SmPolicyData'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        414:
+          description: URI Too Long
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    patch:
+      summary: Modify the session management policy data for a subscriber
+      operationId: UpdateSessionManagementPolicyData
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/UsageMonData'
+      responses:
+        204:
+          description: Successful case. The resource has been successfully updated
+            and no additional content is to be sent in the response message.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/ues/{ueId}/sm-data/{usageMonId}:
+    get:
+      summary: Retrieve a usage monitoring resource
+      operationId: ReadUsageMonitoringInformation
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      - name: usageMonId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful case. The usage monitoring data is returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMonData'
+        204:
+          description: The resource was found but no usage monitoring data is available.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        414:
+          description: URI Too Long
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    put:
+      summary: Create a usage monitoring resource
+      operationId: CreateUsageMonitoringResource
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      - name: usageMonId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsageMonData'
+      responses:
+        201:
+          description: Successful case. The resource has been successfully created
+            and a response body is returned containing a representation of the resource.
+          headers:
+            Location:
+              description: Contains the URI of the newly created resource
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageMonData'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        414:
+          description: URI Too Long
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete a usage monitoring resource
+      operationId: DeleteUsageMonitoringInformation
+      parameters:
+      - name: ueId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      - name: usageMonId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        204:
+          description: Successful case. The resource has been successfully deleted.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/sponsor-connectivity-data/{sponsorId}:
+    get:
+      summary: Retrieves the sponsored connectivity information for a given sponsorId
+      operationId: ReadSponsorConnectivityData
+      parameters:
+      - name: sponsorId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Upon success, a response body containing Sponsor Connectivity
+            Data shall be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SponsorConnectivityData'
+        204:
+          description: The resource was found but no Sponsor Connectivity Data is
+            available.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/bdt-data:
+    get:
+      summary: Retrieves the BDT data collection
+      operationId: ReadBdtData
+      responses:
+        200:
+          description: Upon success, a response body containing the BDT data shall
+            be returned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BdtData'
+                x-content-type: application/json
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/bdt-data/{bdtReferenceId}:
+    get:
+      summary: Retrieves the BDT data information associated with a BDT reference
+        Id
+      operationId: ReadIndividualBdtData
+      parameters:
+      - name: bdtReferenceId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Upon success, a response body containing the BDT data shall
+            be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BdtData'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    put:
+      summary: Creates an BDT data resource associated with an BDT reference Id
+      operationId: CreateIndividualBdtData
+      parameters:
+      - name: bdtReferenceId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BdtData'
+      responses:
+        201:
+          description: Successful case. The resource has been successfully created.
+          headers:
+            Location:
+              description: Contains the URI of the newly created resource
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BdtData'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        414:
+          description: URI Too Long
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    delete:
+      summary: Deletes an BDT data resource associated with an BDT reference Id
+      operationId: DeleteIndividualBdtData
+      parameters:
+      - name: bdtReferenceId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        204:
+          description: Successful case. The resource has been successfully deleted.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/subs-to-notify:
+    post:
+      summary: Create a subscription to receive notification of policy data changes
+      operationId: CreateIndividualPolicyDataSubscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyDataSubscription'
+      responses:
+        201:
+          description: Upon success, a response body containing a representation of
+            each Individual subscription resource shall be returned.
+          headers:
+            Location:
+              description: Contains the URI of the newly created resource
+              required: true
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDataSubscription'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      callbacks:
+        policyDataChangeNotification:
+          '{$request.body#/notificationUri}':
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      minItems: 1
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/PolicyDataChangeNotification'
+                required: true
+              responses:
+                204:
+                  description: No Content, Notification was successful
+                400:
+                  description: Bad request
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                401:
+                  description: Unauthorized
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                403:
+                  description: Forbidden
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                404:
+                  description: Not Found
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                411:
+                  description: Length Required
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                413:
+                  description: Payload Too Large
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                415:
+                  description: Unsupported Media Type
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                429:
+                  description: Too Many Requests
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                500:
+                  description: Internal Server Error
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                503:
+                  description: Service Unavailable
+                  content:
+                    application/problem+json:
+                      schema:
+                        $ref: '#/components/schemas/ProblemDetails'
+                default:
+                  description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/subs-to-notify/{subsId}:
+    put:
+      summary: Modify a subscription to receive notification of policy data changes
+      operationId: ReplaceIndividualPolicyDataSubscription
+      parameters:
+      - name: subsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PolicyDataSubscription'
+      responses:
+        200:
+          description: The individual subscription resource was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyDataSubscription'
+        204:
+          description: The individual subscription resource was updated successfully
+            and no additional content is to be sent in the response message.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    delete:
+      summary: Delete the individual Policy Data subscription
+      operationId: DeleteIndividualPolicyDataSubscription
+      parameters:
+      - name: subsId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        204:
+          description: Upon success, an empty response body shall be returned.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/ues/{ueId}/operator-specific-data:
+    get:
+      summary: Retrieve the operator specific policy data of an UE
+      operationId: ReadOperatorSpecificData
+      parameters:
+      - name: ueId
+        in: path
+        description: UE Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      - name: fields
+        in: query
+        description: attributes to be retrieved
+        required: false
+        style: form
+        explode: true
+        schema:
+          minItems: 1
+          type: array
+          items:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/OperatorSpecificDataContainer'
+                x-content-type: application/json
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        414:
+          description: URI Too Long
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    put:
+      summary: Modify the operator specific policy data of an UE
+      operationId: ReplaceOperatorSpecificData
+      parameters:
+      - name: ueId
+        in: path
+        description: UE Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/OperatorSpecificDataContainer'
+        required: true
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/OperatorSpecificDataContainer'
+                x-content-type: application/json
+        204:
+          description: The resource has been successfully updated.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+    patch:
+      summary: Modify the operator specific policy data of an UE
+      operationId: UpdateOperatorSpecificData
+      parameters:
+      - name: ueId
+        in: path
+        description: UE Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarUeId'
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PatchItem'
+        required: true
+      responses:
+        204:
+          description: No content. Response to successful modification.
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        411:
+          description: Length Required
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        413:
+          description: Payload Too Large
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        415:
+          description: Unsupported Media Type
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+  /policy-data/plmns/{plmnId}/ue-policy-set:
+    get:
+      summary: Retrieve the UE policy set data for an H-PLMN
+      operationId: ReadPlmnUePolicySet
+      parameters:
+      - name: plmnId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/VarPlmnId'
+      responses:
+        200:
+          description: Upon success, a response body containing UE policies shall
+            be returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UePolicySet'
+        400:
+          description: Bad request
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        401:
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        403:
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        404:
+          description: Not Found
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        406:
+          description: 406 Not Acceptable
+        412:
+          description: Precondition Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        429:
+          description: Too Many Requests
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        500:
+          description: Internal Server Error
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        503:
+          description: Service Unavailable
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: Generic Error
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    AmPolicyData:
+      type: object
+      properties:
+        praInfos:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PresenceInfo'
+        subscCats:
+          minItems: 1
+          type: array
+          items:
+            type: string
+      description: Contains the AM policy data for a given subscriber.
+      example:
+        subscCats:
+        - subscCats
+        - subscCats
+        praInfos:
+          key:
+            ecgiList:
+            - eutraCellId: eutraCellId
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            - eutraCellId: eutraCellId
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            globalRanNodeIdList:
+            - gNbId:
+                bitLength: 22
+                gNBValue: gNBValue
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+              n3IwfId: n3IwfId
+              ngeNbId: ngeNbId
+            - gNbId:
+                bitLength: 22
+                gNBValue: gNBValue
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+              n3IwfId: n3IwfId
+              ngeNbId: ngeNbId
+            presenceState: ""
+            praId: praId
+            trackingAreaList:
+            - tac: tac
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            - tac: tac
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            ncgiList:
+            - plmnId:
+                mnc: mnc
+                mcc: mcc
+              nrCellId: nrCellId
+            - plmnId:
+                mnc: mnc
+                mcc: mcc
+              nrCellId: nrCellId
+    UePolicySet:
+      type: object
+      properties:
+        praInfos:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PresenceInfo'
+        subscCats:
+          minItems: 1
+          type: array
+          items:
+            type: string
+        uePolicySections:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UePolicySection'
+        upsis:
+          minItems: 1
+          type: array
+          items:
+            type: string
+        allowedRouteSelDescs:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PlmnRouteSelectionDescriptor'
+        andspInd:
+          type: boolean
+        pei:
+          $ref: '#/components/schemas/Pei'
+        osIds:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/OsId'
+      description: Contains the UE policy data for a given subscriber.
+      example:
+        uePolicySections:
+          key:
+            uePolicySectionInfo: ""
+            upsi: upsi
+        pei: pei
+        osIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        subscCats:
+        - subscCats
+        - subscCats
+        upsis:
+        - upsis
+        - upsis
+        andspInd: true
+        allowedRouteSelDescs:
+          key:
+            servingPlmn:
+              mnc: mnc
+              mcc: mcc
+            snssaiRouteSelDescs:
+            - snssai:
+                sd: sd
+                sst: 20
+              dnnRouteSelDescs:
+              - pduSessTypes:
+                - ""
+                - ""
+                dnn: dnn
+                sscModes:
+                - ""
+                - ""
+              - pduSessTypes:
+                - ""
+                - ""
+                dnn: dnn
+                sscModes:
+                - ""
+                - ""
+            - snssai:
+                sd: sd
+                sst: 20
+              dnnRouteSelDescs:
+              - pduSessTypes:
+                - ""
+                - ""
+                dnn: dnn
+                sscModes:
+                - ""
+                - ""
+              - pduSessTypes:
+                - ""
+                - ""
+                dnn: dnn
+                sscModes:
+                - ""
+                - ""
+        praInfos:
+          key:
+            ecgiList:
+            - eutraCellId: eutraCellId
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            - eutraCellId: eutraCellId
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            globalRanNodeIdList:
+            - gNbId:
+                bitLength: 22
+                gNBValue: gNBValue
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+              n3IwfId: n3IwfId
+              ngeNbId: ngeNbId
+            - gNbId:
+                bitLength: 22
+                gNBValue: gNBValue
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+              n3IwfId: n3IwfId
+              ngeNbId: ngeNbId
+            presenceState: ""
+            praId: praId
+            trackingAreaList:
+            - tac: tac
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            - tac: tac
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            ncgiList:
+            - plmnId:
+                mnc: mnc
+                mcc: mcc
+              nrCellId: nrCellId
+            - plmnId:
+                mnc: mnc
+                mcc: mcc
+              nrCellId: nrCellId
+    UePolicySetPatch:
+      type: object
+      properties:
+        uePolicySections:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UePolicySection'
+        upsis:
+          minItems: 1
+          type: array
+          items:
+            type: string
+        andspInd:
+          type: boolean
+        pei:
+          $ref: '#/components/schemas/Pei'
+        osIds:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/OsId'
+      description: Contains the UE policy set for a given subscriber.
+    UePolicySection:
+      required:
+      - uePolicySectionInfo
+      - upsi
+      type: object
+      properties:
+        uePolicySectionInfo:
+          $ref: '#/components/schemas/Bytes'
+        upsi:
+          type: string
+      description: Contains the UE policy section.
+      example:
+        uePolicySectionInfo: ""
+        upsi: upsi
+    SmPolicyData:
+      required:
+      - smPolicySnssaiData
+      type: object
+      properties:
+        smPolicySnssaiData:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SmPolicySnssaiData'
+        umDataLimits:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UsageMonDataLimit'
+        umData:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UsageMonData'
+      description: Contains the SM policy data for a given subscriber.
+      example:
+        umData:
+          key:
+            allowedUsage:
+              duration: 0
+              totalVolume: 0
+              downlinkVolume: 0
+              uplinkVolume: 0
+            limitId: limitId
+            scopes:
+              key:
+                snssai:
+                  sd: sd
+                  sst: 20
+                dnn:
+                - dnn
+                - dnn
+            umLevel: ""
+            resetTime:
+              period: ""
+              maxNumPeriod: 0
+        umDataLimits:
+          key:
+            resetPeriod: 2000-01-23T04:56:07.000+00:00
+            endDate: 2000-01-23T04:56:07.000+00:00
+            usageLimit:
+              duration: 0
+              totalVolume: 0
+              downlinkVolume: 0
+              uplinkVolume: 0
+            limitId: limitId
+            scopes:
+              key:
+                snssai:
+                  sd: sd
+                  sst: 20
+                dnn:
+                - dnn
+                - dnn
+            umLevel: ""
+            startDate: 2000-01-23T04:56:07.000+00:00
+        smPolicySnssaiData:
+          key:
+            smPolicyDnnData:
+              key:
+                adcSupport: true
+                dnn: dnn
+                ipv4Index: 0
+                gbrDl: gbrDl
+                subscSpendingLimits: true
+                chfInfo:
+                  secondaryChfAddress: secondaryChfAddress
+                  primaryChfAddress: primaryChfAddress
+                praInfos:
+                  key:
+                    ecgiList:
+                    - eutraCellId: eutraCellId
+                      plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                    - eutraCellId: eutraCellId
+                      plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                    globalRanNodeIdList:
+                    - gNbId:
+                        bitLength: 22
+                        gNBValue: gNBValue
+                      plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                      n3IwfId: n3IwfId
+                      ngeNbId: ngeNbId
+                    - gNbId:
+                        bitLength: 22
+                        gNBValue: gNBValue
+                      plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                      n3IwfId: n3IwfId
+                      ngeNbId: ngeNbId
+                    presenceState: ""
+                    praId: praId
+                    trackingAreaList:
+                    - tac: tac
+                      plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                    - tac: tac
+                      plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                    ncgiList:
+                    - plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                      nrCellId: nrCellId
+                    - plmnId:
+                        mnc: mnc
+                        mcc: mcc
+                      nrCellId: nrCellId
+                refUmDataLimitIds:
+                  key:
+                    monkey:
+                    - monkey
+                    - monkey
+                    limitId: limitId
+                offline: true
+                allowedServices:
+                - allowedServices
+                - allowedServices
+                mpsPriority: true
+                imsSignallingPrio: true
+                subscCats:
+                - subscCats
+                - subscCats
+                gbrUl: gbrUl
+                ipv6Index: 6
+                online: true
+                mpsPriorityLevel: 1
+            snssai:
+              sd: sd
+              sst: 20
+    SmPolicySnssaiData:
+      required:
+      - snssai
+      type: object
+      properties:
+        snssai:
+          $ref: '#/components/schemas/Snssai'
+        smPolicyDnnData:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/SmPolicyDnnData'
+      description: Contains the SM policy data for a given subscriber and S-NSSAI.
+      example:
+        smPolicyDnnData:
+          key:
+            adcSupport: true
+            dnn: dnn
+            ipv4Index: 0
+            gbrDl: gbrDl
+            subscSpendingLimits: true
+            chfInfo:
+              secondaryChfAddress: secondaryChfAddress
+              primaryChfAddress: primaryChfAddress
+            praInfos:
+              key:
+                ecgiList:
+                - eutraCellId: eutraCellId
+                  plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                - eutraCellId: eutraCellId
+                  plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                globalRanNodeIdList:
+                - gNbId:
+                    bitLength: 22
+                    gNBValue: gNBValue
+                  plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                  n3IwfId: n3IwfId
+                  ngeNbId: ngeNbId
+                - gNbId:
+                    bitLength: 22
+                    gNBValue: gNBValue
+                  plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                  n3IwfId: n3IwfId
+                  ngeNbId: ngeNbId
+                presenceState: ""
+                praId: praId
+                trackingAreaList:
+                - tac: tac
+                  plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                - tac: tac
+                  plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                ncgiList:
+                - plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                  nrCellId: nrCellId
+                - plmnId:
+                    mnc: mnc
+                    mcc: mcc
+                  nrCellId: nrCellId
+            refUmDataLimitIds:
+              key:
+                monkey:
+                - monkey
+                - monkey
+                limitId: limitId
+            offline: true
+            allowedServices:
+            - allowedServices
+            - allowedServices
+            mpsPriority: true
+            imsSignallingPrio: true
+            subscCats:
+            - subscCats
+            - subscCats
+            gbrUl: gbrUl
+            ipv6Index: 6
+            online: true
+            mpsPriorityLevel: 1
+        snssai:
+          sd: sd
+          sst: 20
+    SmPolicyDnnData:
+      required:
+      - dnn
+      type: object
+      properties:
+        dnn:
+          $ref: '#/components/schemas/Dnn'
+        allowedServices:
+          minItems: 1
+          type: array
+          items:
+            type: string
+        subscCats:
+          minItems: 1
+          type: array
+          items:
+            type: string
+        gbrUl:
+          $ref: '#/components/schemas/BitRate'
+        gbrDl:
+          $ref: '#/components/schemas/BitRate'
+        adcSupport:
+          type: boolean
+        subscSpendingLimits:
+          type: boolean
+        ipv4Index:
+          $ref: '#/components/schemas/IpIndex'
+        ipv6Index:
+          $ref: '#/components/schemas/IpIndex'
+        offline:
+          type: boolean
+        online:
+          type: boolean
+        chfInfo:
+          $ref: '#/components/schemas/ChargingInformation'
+        refUmDataLimitIds:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/LimitIdToMonitoringKey'
+        mpsPriority:
+          type: boolean
+        imsSignallingPrio:
+          type: boolean
+        mpsPriorityLevel:
+          type: integer
+        praInfos:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/PresenceInfo'
+      description: Contains the SM policy data for a given DNN (and S-NSSAI).
+      example:
+        adcSupport: true
+        dnn: dnn
+        ipv4Index: 0
+        gbrDl: gbrDl
+        subscSpendingLimits: true
+        chfInfo:
+          secondaryChfAddress: secondaryChfAddress
+          primaryChfAddress: primaryChfAddress
+        praInfos:
+          key:
+            ecgiList:
+            - eutraCellId: eutraCellId
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            - eutraCellId: eutraCellId
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            globalRanNodeIdList:
+            - gNbId:
+                bitLength: 22
+                gNBValue: gNBValue
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+              n3IwfId: n3IwfId
+              ngeNbId: ngeNbId
+            - gNbId:
+                bitLength: 22
+                gNBValue: gNBValue
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+              n3IwfId: n3IwfId
+              ngeNbId: ngeNbId
+            presenceState: ""
+            praId: praId
+            trackingAreaList:
+            - tac: tac
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            - tac: tac
+              plmnId:
+                mnc: mnc
+                mcc: mcc
+            ncgiList:
+            - plmnId:
+                mnc: mnc
+                mcc: mcc
+              nrCellId: nrCellId
+            - plmnId:
+                mnc: mnc
+                mcc: mcc
+              nrCellId: nrCellId
+        refUmDataLimitIds:
+          key:
+            monkey:
+            - monkey
+            - monkey
+            limitId: limitId
+        offline: true
+        allowedServices:
+        - allowedServices
+        - allowedServices
+        mpsPriority: true
+        imsSignallingPrio: true
+        subscCats:
+        - subscCats
+        - subscCats
+        gbrUl: gbrUl
+        ipv6Index: 6
+        online: true
+        mpsPriorityLevel: 1
+    UsageMonDataLimit:
+      required:
+      - limitId
+      type: object
+      properties:
+        limitId:
+          type: string
+        scopes:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UsageMonDataScope'
+        umLevel:
+          $ref: '#/components/schemas/UsageMonLevel'
+        startDate:
+          $ref: '#/components/schemas/DateTime'
+        endDate:
+          $ref: '#/components/schemas/DateTime'
+        usageLimit:
+          $ref: '#/components/schemas/UsageThreshold'
+        resetPeriod:
+          $ref: '#/components/schemas/DateTime'
+      description: Contains usage monitoring control data for a subscriber.
+      example:
+        resetPeriod: 2000-01-23T04:56:07.000+00:00
+        endDate: 2000-01-23T04:56:07.000+00:00
+        usageLimit:
+          duration: 0
+          totalVolume: 0
+          downlinkVolume: 0
+          uplinkVolume: 0
+        limitId: limitId
+        scopes:
+          key:
+            snssai:
+              sd: sd
+              sst: 20
+            dnn:
+            - dnn
+            - dnn
+        umLevel: ""
+        startDate: 2000-01-23T04:56:07.000+00:00
+    UsageMonData:
+      required:
+      - limitId
+      type: object
+      properties:
+        limitId:
+          type: string
+        scopes:
+          minProperties: 1
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/UsageMonDataScope'
+        umLevel:
+          $ref: '#/components/schemas/UsageMonLevel'
+        allowedUsage:
+          $ref: '#/components/schemas/UsageThreshold'
+        resetTime:
+          $ref: '#/components/schemas/TimePeriod'
+      description: Contains remain allowed usage data for a subscriber.
+      example:
+        allowedUsage:
+          duration: 0
+          totalVolume: 0
+          downlinkVolume: 0
+          uplinkVolume: 0
+        limitId: limitId
+        scopes:
+          key:
+            snssai:
+              sd: sd
+              sst: 20
+            dnn:
+            - dnn
+            - dnn
+        umLevel: ""
+        resetTime:
+          period: ""
+          maxNumPeriod: 0
+    LimitIdToMonitoringKey:
+      required:
+      - limitId
+      type: object
+      properties:
+        limitId:
+          type: string
+        monkey:
+          minItems: 1
+          type: array
+          items:
+            type: string
+      description: Contains the limit identifier and the corresponding monitoring
+        key for a given S-NSSAI and DNN.
+      example:
+        monkey:
+        - monkey
+        - monkey
+        limitId: limitId
+    UsageMonDataScope:
+      required:
+      - snssai
+      type: object
+      properties:
+        snssai:
+          $ref: '#/components/schemas/Snssai'
+        dnn:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Dnn'
+      description: Contains a SNSSAI and DNN combinations to which the UsageMonData
+        instance belongs to.
+      example:
+        snssai:
+          sd: sd
+          sst: 20
+        dnn:
+        - dnn
+        - dnn
+    TimePeriod:
+      required:
+      - period
+      type: object
+      properties:
+        period:
+          $ref: '#/components/schemas/Periodicity'
+        maxNumPeriod:
+          $ref: '#/components/schemas/Uinteger'
+      description: Contains the periodicity for the defined usage monitoring data
+        limits.
+      example:
+        period: ""
+        maxNumPeriod: 0
+    SponsorConnectivityData:
+      required:
+      - aspIds
+      type: object
+      properties:
+        aspIds:
+          type: array
+          items:
+            type: string
+      description: Contains the sponsored data connectivity related information for
+        a sponsor identifier.
+      example:
+        aspIds:
+        - aspIds
+        - aspIds
+    BdtData:
+      required:
+      - aspId
+      - transPolicy
+      type: object
+      properties:
+        aspId:
+          type: string
+        transPolicy:
+          $ref: '#/components/schemas/TransferPolicy'
+        bdtRefId:
+          type: string
+        nwAreaInfo:
+          $ref: '#/components/schemas/NetworkAreaInfo'
+        numOfUes:
+          $ref: '#/components/schemas/Uinteger'
+        volPerUe:
+          $ref: '#/components/schemas/UsageThreshold'
+      description: Contains the background data transfer data.
+      example:
+        nwAreaInfo:
+          ncgis:
+          - plmnId:
+              mnc: mnc
+              mcc: mcc
+            nrCellId: nrCellId
+          - plmnId:
+              mnc: mnc
+              mcc: mcc
+            nrCellId: nrCellId
+          tais:
+          - tac: tac
+            plmnId:
+              mnc: mnc
+              mcc: mcc
+          - tac: tac
+            plmnId:
+              mnc: mnc
+              mcc: mcc
+          gRanNodeIds:
+          - gNbId:
+              bitLength: 22
+              gNBValue: gNBValue
+            plmnId:
+              mnc: mnc
+              mcc: mcc
+            n3IwfId: n3IwfId
+            ngeNbId: ngeNbId
+          - gNbId:
+              bitLength: 22
+              gNBValue: gNBValue
+            plmnId:
+              mnc: mnc
+              mcc: mcc
+            n3IwfId: n3IwfId
+            ngeNbId: ngeNbId
+          ecgis:
+          - eutraCellId: eutraCellId
+            plmnId:
+              mnc: mnc
+              mcc: mcc
+          - eutraCellId: eutraCellId
+            plmnId:
+              mnc: mnc
+              mcc: mcc
+        aspId: aspId
+        numOfUes: 0
+        transPolicy:
+          maxBitRateDl: maxBitRateDl
+          maxBitRateUl: maxBitRateUl
+          ratingGroup: 0
+          transPolicyId: 6
+          recTimeInt:
+            startTime: startTime
+            stopTime: stopTime
+        volPerUe:
+          duration: 0
+          totalVolume: 0
+          downlinkVolume: 0
+          uplinkVolume: 0
+        bdtRefId: bdtRefId
+    PolicyDataSubscription:
+      required:
+      - monitoredResourceUris
+      - notificationUri
+      type: object
+      properties:
+        notificationUri:
+          $ref: '#/components/schemas/Uri'
+        monitoredResourceUris:
+          type: array
+          items:
+            $ref: '#/components/schemas/Uri'
+        expiry:
+          $ref: '#/components/schemas/DateTime'
+        supportedFeatures:
+          $ref: '#/components/schemas/SupportedFeatures'
+      description: Identifies a subscription to policy data change notification.
+      example:
+        supportedFeatures: supportedFeatures
+        notificationUri: notificationUri
+        monitoredResourceUris:
+        - monitoredResourceUris
+        - monitoredResourceUris
+        expiry: 2000-01-23T04:56:07.000+00:00
+    PolicyDataChangeNotification:
+      type: object
+      properties:
+        amPolicyData:
+          $ref: '#/components/schemas/AmPolicyData'
+        uePolicySet:
+          $ref: '#/components/schemas/UePolicySet'
+        plmnUePolicySet:
+          $ref: '#/components/schemas/UePolicySet'
+        smPolicyData:
+          $ref: '#/components/schemas/SmPolicyData'
+        usageMonData:
+          $ref: '#/components/schemas/UsageMonData'
+        SponsorConnectivityData:
+          $ref: '#/components/schemas/SponsorConnectivityData'
+        bdtData:
+          $ref: '#/components/schemas/BdtData'
+        opSpecData:
+          $ref: '#/components/schemas/OperatorSpecificDataContainer'
+        ueId:
+          $ref: '#/components/schemas/VarUeId'
+        sponsorId:
+          type: string
+        bdtRefId:
+          type: string
+        usageMonId:
+          type: string
+        plmnId:
+          $ref: '#/components/schemas/PlmnId'
+        delResources:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Uri'
+      description: Contains changed policy data for which notification was requested.
+    PlmnRouteSelectionDescriptor:
+      required:
+      - servingPlmn
+      type: object
+      properties:
+        servingPlmn:
+          $ref: '#/components/schemas/PlmnId'
+        snssaiRouteSelDescs:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/SnssaiRouteSelectionDescriptor'
+      description: Contains the route selection descriptors (combinations of SNSSAI,
+        DNNs, PDU session types, and SSC modes) allowed by subscription to the UE
+        for a serving PLMN
+      example:
+        servingPlmn:
+          mnc: mnc
+          mcc: mcc
+        snssaiRouteSelDescs:
+        - snssai:
+            sd: sd
+            sst: 20
+          dnnRouteSelDescs:
+          - pduSessTypes:
+            - ""
+            - ""
+            dnn: dnn
+            sscModes:
+            - ""
+            - ""
+          - pduSessTypes:
+            - ""
+            - ""
+            dnn: dnn
+            sscModes:
+            - ""
+            - ""
+        - snssai:
+            sd: sd
+            sst: 20
+          dnnRouteSelDescs:
+          - pduSessTypes:
+            - ""
+            - ""
+            dnn: dnn
+            sscModes:
+            - ""
+            - ""
+          - pduSessTypes:
+            - ""
+            - ""
+            dnn: dnn
+            sscModes:
+            - ""
+            - ""
+    SnssaiRouteSelectionDescriptor:
+      required:
+      - snssai
+      type: object
+      properties:
+        snssai:
+          $ref: '#/components/schemas/Snssai'
+        dnnRouteSelDescs:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/DnnRouteSelectionDescriptor'
+      description: Contains the route selector parameters (DNNs, PDU session types
+        and SSC modes) per SNSSAI
+      example:
+        snssai:
+          sd: sd
+          sst: 20
+        dnnRouteSelDescs:
+        - pduSessTypes:
+          - ""
+          - ""
+          dnn: dnn
+          sscModes:
+          - ""
+          - ""
+        - pduSessTypes:
+          - ""
+          - ""
+          dnn: dnn
+          sscModes:
+          - ""
+          - ""
+    DnnRouteSelectionDescriptor:
+      required:
+      - dnn
+      type: object
+      properties:
+        dnn:
+          $ref: '#/components/schemas/Dnn'
+        sscModes:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/SscMode'
+        pduSessTypes:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/PduSessionType'
+      description: Contains the route selector parameters (PDU session types and SSC
+        modes) per DNN
+      example:
+        pduSessTypes:
+        - ""
+        - ""
+        dnn: dnn
+        sscModes:
+        - ""
+        - ""
+    IpIndex:
+      type: integer
+    OsId:
+      type: string
+      format: uuid
+    UsageMonLevel:
+      anyOf:
+      - type: string
+        enum:
+        - SESSION_LEVEL
+        - SERVICE_LEVEL
+      - type: string
+    Periodicity:
+      anyOf:
+      - type: string
+        enum:
+        - YEARLY
+        - MONTHLY
+        - WEEKLY
+        - DAILY
+        - HOURLY
+      - type: string
+    VarUeId:
+      pattern: ^(imsi-[0-9]{5,15}|nai-.+|msisdn-[0-9]{5,15}|extid-[^@]+@[^@]+|.+)$
+      type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/Uri'
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          $ref: '#/components/schemas/Uri'
+        cause:
+          type: string
+        invalidParams:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/InvalidParam'
+        supportedFeatures:
+          $ref: '#/components/schemas/SupportedFeatures'
+    Uri:
+      type: string
+    InvalidParam:
+      required:
+      - param
+      type: object
+      properties:
+        param:
+          type: string
+        reason:
+          type: string
+    SupportedFeatures:
+      pattern: ^[A-Fa-f0-9]*$
+      type: string
+    OperatorSpecificDataContainer:
+      type: object
+      properties:
+        StringTypeElements:
+          type: object
+          additionalProperties:
+            type: string
+        IntegerTypeElements:
+          type: object
+          additionalProperties:
+            type: integer
+        NumberTypeElements:
+          type: object
+          additionalProperties:
+            type: number
+        BooleanTypeElements:
+          type: object
+          additionalProperties:
+            type: boolean
+      example:
+        NumberTypeElements:
+          key: 6.02745618307040320615897144307382404804229736328125
+        IntegerTypeElements:
+          key: 0
+        StringTypeElements:
+          key: StringTypeElements
+        BooleanTypeElements:
+          key: true
+    PatchItem:
+      required:
+      - op
+      - path
+      type: object
+      properties:
+        op:
+          $ref: '#/components/schemas/PatchOperation'
+        path:
+          type: string
+        from:
+          type: string
+        value:
+          nullable: true
+    PatchOperation:
+      anyOf:
+      - type: string
+        enum:
+        - add
+        - copy
+        - move
+        - remove
+        - replace
+        - test
+      - type: string
+    VarPlmnId:
+      pattern: /^[0-9]{5,6}$/
+      type: string
+    PresenceInfo:
+      type: object
+      properties:
+        praId:
+          type: string
+        presenceState:
+          $ref: '#/components/schemas/PresenceState'
+        trackingAreaList:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Tai'
+        ecgiList:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Ecgi'
+        ncgiList:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Ncgi'
+        globalRanNodeIdList:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalRanNodeId'
+      example:
+        ecgiList:
+        - eutraCellId: eutraCellId
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        - eutraCellId: eutraCellId
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        globalRanNodeIdList:
+        - gNbId:
+            bitLength: 22
+            gNBValue: gNBValue
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+          n3IwfId: n3IwfId
+          ngeNbId: ngeNbId
+        - gNbId:
+            bitLength: 22
+            gNBValue: gNBValue
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+          n3IwfId: n3IwfId
+          ngeNbId: ngeNbId
+        presenceState: ""
+        praId: praId
+        trackingAreaList:
+        - tac: tac
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        - tac: tac
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        ncgiList:
+        - plmnId:
+            mnc: mnc
+            mcc: mcc
+          nrCellId: nrCellId
+        - plmnId:
+            mnc: mnc
+            mcc: mcc
+          nrCellId: nrCellId
+    PresenceState:
+      anyOf:
+      - type: string
+        enum:
+        - IN_AREA
+        - OUT_OF_AREA
+        - UNKNOWN
+        - INACTIVE
+      - type: string
+    Tai:
+      required:
+      - plmnId
+      - tac
+      type: object
+      properties:
+        plmnId:
+          $ref: '#/components/schemas/PlmnId'
+        tac:
+          $ref: '#/components/schemas/Tac'
+      example:
+        tac: tac
+        plmnId:
+          mnc: mnc
+          mcc: mcc
+    PlmnId:
+      required:
+      - mcc
+      - mnc
+      type: object
+      properties:
+        mcc:
+          $ref: '#/components/schemas/Mcc'
+        mnc:
+          $ref: '#/components/schemas/Mnc'
+      example:
+        mnc: mnc
+        mcc: mcc
+    Mcc:
+      pattern: ^\d{3}$
+      type: string
+    Mnc:
+      pattern: ^\d{2,3}$
+      type: string
+    Tac:
+      pattern: (^[A-Fa-f0-9]{4}$)|(^[A-Fa-f0-9]{6}$)
+      type: string
+    Ecgi:
+      required:
+      - eutraCellId
+      - plmnId
+      type: object
+      properties:
+        plmnId:
+          $ref: '#/components/schemas/PlmnId'
+        eutraCellId:
+          $ref: '#/components/schemas/EutraCellId'
+      example:
+        eutraCellId: eutraCellId
+        plmnId:
+          mnc: mnc
+          mcc: mcc
+    EutraCellId:
+      pattern: ^[A-Fa-f0-9]{7}$
+      type: string
+    Ncgi:
+      required:
+      - nrCellId
+      - plmnId
+      type: object
+      properties:
+        plmnId:
+          $ref: '#/components/schemas/PlmnId'
+        nrCellId:
+          $ref: '#/components/schemas/NrCellId'
+      example:
+        plmnId:
+          mnc: mnc
+          mcc: mcc
+        nrCellId: nrCellId
+    NrCellId:
+      pattern: ^[A-Fa-f0-9]{9}$
+      type: string
+    GlobalRanNodeId:
+      required:
+      - plmnId
+      type: object
+      properties:
+        plmnId:
+          $ref: '#/components/schemas/PlmnId'
+        n3IwfId:
+          $ref: '#/components/schemas/N3IwfId'
+        gNbId:
+          $ref: '#/components/schemas/GNbId'
+        ngeNbId:
+          $ref: '#/components/schemas/NgeNbId'
+      example:
+        gNbId:
+          bitLength: 22
+          gNBValue: gNBValue
+        plmnId:
+          mnc: mnc
+          mcc: mcc
+        n3IwfId: n3IwfId
+        ngeNbId: ngeNbId
+      oneOf:
+      - required:
+        - n3IwfId
+      - required:
+        - gNbId
+      - required:
+        - ngeNbId
+    N3IwfId:
+      pattern: ^[A-Fa-f0-9]+$
+      type: string
+    GNbId:
+      required:
+      - bitLength
+      - gNBValue
+      type: object
+      properties:
+        bitLength:
+          maximum: 32
+          minimum: 22
+          type: integer
+        gNBValue:
+          pattern: ^[A-Fa-f0-9]{6,8}$
+          type: string
+      example:
+        bitLength: 22
+        gNBValue: gNBValue
+    NgeNbId:
+      pattern: ^(MacroNGeNB-[A-Fa-f0-9]{5}|LMacroNGeNB-[A-Fa-f0-9]{6}|SMacroNGeNB-[A-Fa-f0-9]{5})$
+      type: string
+    Pei:
+      pattern: ^(imei-[0-9]{15}|imeisv-[0-9]{16}|.+)$
+      type: string
+    Bytes:
+      type: string
+      format: byte
+    Snssai:
+      required:
+      - sst
+      type: object
+      properties:
+        sst:
+          maximum: 255
+          minimum: 0
+          type: integer
+        sd:
+          pattern: ^[A-Fa-f0-9]{6}$
+          type: string
+      example:
+        sd: sd
+        sst: 20
+    Dnn:
+      type: string
+    BitRate:
+      pattern: ^\d+(\.\d+)? (bps|Kbps|Mbps|Gbps|Tbps)$
+      type: string
+    ChargingInformation:
+      required:
+      - primaryChfAddress
+      - secondaryChfAddress
+      type: object
+      properties:
+        primaryChfAddress:
+          $ref: '#/components/schemas/Uri'
+        secondaryChfAddress:
+          $ref: '#/components/schemas/Uri'
+      example:
+        secondaryChfAddress: secondaryChfAddress
+        primaryChfAddress: primaryChfAddress
+    DateTime:
+      type: string
+      format: date-time
+    UsageThreshold:
+      type: object
+      properties:
+        duration:
+          $ref: '#/components/schemas/DurationSec'
+        totalVolume:
+          $ref: '#/components/schemas/Volume'
+        downlinkVolume:
+          $ref: '#/components/schemas/Volume'
+        uplinkVolume:
+          $ref: '#/components/schemas/Volume'
+      example:
+        duration: 0
+        totalVolume: 0
+        downlinkVolume: 0
+        uplinkVolume: 0
+    DurationSec:
+      minimum: 0
+      type: integer
+      description: Unsigned integer identifying a period of time in units of seconds.
+    Volume:
+      minimum: 0
+      type: integer
+      description: Unsigned integer identifying a volume in units of bytes.
+      format: int64
+    Uinteger:
+      minimum: 0
+      type: integer
+    TransferPolicy:
+      required:
+      - ratingGroup
+      - recTimeInt
+      - transPolicyId
+      type: object
+      properties:
+        maxBitRateDl:
+          $ref: '#/components/schemas/BitRate'
+        maxBitRateUl:
+          $ref: '#/components/schemas/BitRate'
+        ratingGroup:
+          type: integer
+          description: Indicates a rating group for the recommended time window.
+        recTimeInt:
+          $ref: '#/components/schemas/TimeWindow'
+        transPolicyId:
+          type: integer
+          description: Contains an identity of a transfer policy.
+      description: Describes a transfer policy.
+      example:
+        maxBitRateDl: maxBitRateDl
+        maxBitRateUl: maxBitRateUl
+        ratingGroup: 0
+        transPolicyId: 6
+        recTimeInt:
+          startTime: startTime
+          stopTime: stopTime
+    NetworkAreaInfo:
+      type: object
+      properties:
+        ecgis:
+          minItems: 1
+          type: array
+          description: Contains a list of E-UTRA cell identities.
+          items:
+            $ref: '#/components/schemas/Ecgi'
+        ncgis:
+          minItems: 1
+          type: array
+          description: Contains a list of NR cell identities.
+          items:
+            $ref: '#/components/schemas/Ncgi'
+        gRanNodeIds:
+          minItems: 1
+          type: array
+          description: Contains a list of NG RAN nodes.
+          items:
+            $ref: '#/components/schemas/GlobalRanNodeId'
+        tais:
+          minItems: 1
+          type: array
+          description: Contains a list of tracking area identities.
+          items:
+            $ref: '#/components/schemas/Tai'
+      description: Describes a network area information in which the NF service consumer
+        requests the number of UEs.
+      example:
+        ncgis:
+        - plmnId:
+            mnc: mnc
+            mcc: mcc
+          nrCellId: nrCellId
+        - plmnId:
+            mnc: mnc
+            mcc: mcc
+          nrCellId: nrCellId
+        tais:
+        - tac: tac
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        - tac: tac
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        gRanNodeIds:
+        - gNbId:
+            bitLength: 22
+            gNBValue: gNBValue
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+          n3IwfId: n3IwfId
+          ngeNbId: ngeNbId
+        - gNbId:
+            bitLength: 22
+            gNBValue: gNBValue
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+          n3IwfId: n3IwfId
+          ngeNbId: ngeNbId
+        ecgis:
+        - eutraCellId: eutraCellId
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+        - eutraCellId: eutraCellId
+          plmnId:
+            mnc: mnc
+            mcc: mcc
+    SscMode:
+      anyOf:
+      - type: string
+        enum:
+        - SSC_MODE_1
+        - SSC_MODE_2
+        - SSC_MODE_3
+      - type: string
+    PduSessionType:
+      anyOf:
+      - type: string
+        enum:
+        - IPV4
+        - IPV6
+        - IPV4V6
+        - UNSTRUCTURED
+        - ETHERNET
+      - type: string
+    TimeWindow:
+      required:
+      - startTime
+      - stopTime
+      type: object
+      properties:
+        startTime:
+          $ref: '#/components/schemas/DateTime_2'
+        stopTime:
+          $ref: '#/components/schemas/DateTime_2'
+      example:
+        startTime: startTime
+        stopTime: stopTime
+    DateTime_2:
+      type: string
+      description: string with format "date-time" as defined in OpenAPI.
